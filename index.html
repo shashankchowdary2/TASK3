@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Calculator</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #calculator {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #display {
+      grid-column: span 4;
+      height: 40px;
+      margin-bottom: 10px;
+      font-size: 1.5em;
+      text-align: right;
+      padding: 5px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f8f8f8;
+    }
+
+    button.operator {
+      background-color: #ff8c00;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="calculator">
+    <div id="display"></div>
+    <button class="operator" onclick="clearDisplay()">C</button>
+    <button class="operator" onclick="appendInput('/')">/</button>
+    <button class="operator" onclick="appendInput('')"></button>
+    <button onclick="appendInput('7')">7</button>
+    <button onclick="appendInput('8')">8</button>
+    <button onclick="appendInput('9')">9</button>
+    <button class="operator" onclick="appendInput('-')">-</button>
+    <button onclick="appendInput('4')">4</button>
+    <button onclick="appendInput('5')">5</button>
+    <button onclick="appendInput('6')">6</button>
+    <button class="operator" onclick="appendInput('+')">+</button>
+    <button onclick="appendInput('1')">1</button>
+    <button onclick="appendInput('2')">2</button>
+    <button onclick="appendInput('3')">3</button>
+    <button class="operator" onclick="calculate()">=</button>
+    <button onclick="appendInput('0')">0</button>
+    <button onclick="appendInput('.')">.</button>
+  </div>
+
+  <script>
+    class Calculator {
+      constructor() {
+        this.display = document.getElementById('display');
+        this.clearDisplay();
+      }
+
+      clearDisplay() {
+        this.display.textContent = '';
+      }
+
+      appendInput(value) {
+        this.display.textContent += value;
+      }
+
+      calculate() {
+        try {
+          const result = eval(this.display.textContent);
+          this.display.textContent = result;
+        } catch (error) {
+          this.display.textContent = 'Error';
+        }
+      }
+    }
+
+    const calculator = new Calculator();
+
+    function clearDisplay() {
+      calculator.clearDisplay();
+    }
+
+    function appendInput(value) {
+      calculator.appendInput(value);
+    }
+
+    function calculate() {
+      calculator.calculate();
+    }
+  </script>
+
+</body>
+
+</html>
